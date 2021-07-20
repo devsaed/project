@@ -37,9 +37,4 @@ class CurrencyGetxController extends GetxController {
     }
     return false;
   }
-
-
-
-
-
 }

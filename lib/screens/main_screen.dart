@@ -1,3 +1,4 @@
+import 'package:budget_planner/getx/category_getx_controller.dart';
 import 'package:budget_planner/models/bn_screen.dart';
 import 'package:budget_planner/screens/bn_screen/category_screen.dart';
 import 'package:budget_planner/screens/bn_screen/home_screen.dart';
@@ -6,16 +7,19 @@ import 'package:budget_planner/utils/app_style_colors.dart';
 import 'package:budget_planner/widgets/app_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import 'bn_screen/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<MainScreen> {
   int currentIndex = 0;
+  CategoryGetxController controller = Get.put(CategoryGetxController());
 
   List<BnScreen> screens = <BnScreen>[
     BnScreen(title: 'Home', widget: HomeScreen()),

@@ -1,4 +1,7 @@
+import 'package:budget_planner/getx/category_getx_controller.dart';
+import 'package:budget_planner/models/category.dart';
 import 'package:budget_planner/utils/app_style_colors.dart';
+import 'package:budget_planner/utils/helpers.dart';
 import 'package:budget_planner/utils/size_config.dart';
 import 'package:budget_planner/widgets/app_elevated_button.dart';
 import 'package:budget_planner/widgets/app_text_widget.dart';
@@ -6,21 +9,24 @@ import 'package:budget_planner/widgets/category_type_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class AddCategoryScreen extends StatefulWidget {
   @override
   _AddCategoryScreenState createState() => _AddCategoryScreenState();
 }
 
-class _AddCategoryScreenState extends State<AddCategoryScreen> {
+class _AddCategoryScreenState extends State<AddCategoryScreen> with Helpers {
   int expensesSelected = 0;
   int incomeSelected = 0;
-  late TextEditingController controller;
+  late TextEditingController textEditingController;
+  CategoryGetxController controller = Get.find();
+
 
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController();
+    textEditingController = TextEditingController();
   }
 
   @override
@@ -111,7 +117,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                   ],
                 ),
                 child: TextField(
-                  controller: controller,
+                  controller: textEditingController,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: AppStyleColors.PRIMARY_TEXT_COLOR,
@@ -138,12 +144,49 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                 // fontSize: SizeConfig.scaleTextFont(15),
                 fontWeight: FontWeight.bold,
                 textColor: Colors.white,
-                onPressed: () {},
+                onPressed: () async {
+                  await performSave();
+                },
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future performSave() async {
+    if (checkData()) {
+      await save();
+    }
+  }
+
+  bool checkData() {
+    if (textEditingController.text.isNotEmpty && categorySelect()) {
+      return true;
+    }
+    showSnackBar(context, message: 'enter the all field', error: true);
+    return false;
+  }
+
+  bool categorySelect(){
+    if(incomeSelected == 0){
+      if(expensesSelected == 0){
+        return false;
+      }
+    }
+    return true;
+  }
+  Future save() async {
+    bool created = await CategoryGetxController.to.createCategory(category);
+    String message = created ? 'Created Successfully' : 'Failed to create category';
+    showSnackBar(context, message: message, error: !created);
+  }
+
+  Category get category {
+    Category category = Category();
+    category.name = textEditingController.text;
+    category.expense = expensesSelected == 1;
+    return category;
   }
 }

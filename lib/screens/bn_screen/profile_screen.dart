@@ -119,7 +119,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Divider(height: 0, color: AppStyleColors.GRAY_COLOR),
               CreateAccountTextField(
                 controller: dallyLimitController,
-                hint:user.dayLimit.toString(),
+                hint: user.dayLimit.toString(),
                 prefix: 'Daily limit',
                 inputType: TextInputType.number,
               ),
@@ -148,9 +148,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             text: 'Save',
             fontWeight: FontWeight.bold,
             textColor: Colors.white,
-            onPressed: () {
-
-            },
+            onPressed: () {},
           ),
         ),
       ],
@@ -161,5 +159,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
     User user = SharedPrefController().getUser();
     return user;
   }
-
 }

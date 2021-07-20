@@ -7,6 +7,7 @@ class Category  extends DbTable{
 
   static const TABLE_NAME = 'categories';
 
+  Category();
   Category.fromMap(Map<String, dynamic> rowMap) : super.fromMap(rowMap){
     id = rowMap['id'];
     name = rowMap['name'];

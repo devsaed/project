@@ -41,7 +41,7 @@ class MainApp extends StatelessWidget {
         const Locale('ar'), // Spanish, no country code
       ],
       locale: Locale('en'),
-      initialRoute: ('/launch_screen'),
+      initialRoute: ('/main_screen'),
       routes: {
         '/on_boarding_screen': (context) => OnBoardingScreen(),
         '/launch_screen': (context) => LaunchScreen(),
