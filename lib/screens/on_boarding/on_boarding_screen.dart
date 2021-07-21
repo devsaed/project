@@ -4,6 +4,7 @@ import 'package:budget_planner/widgets/app_elevated_button.dart';
 import 'package:budget_planner/widgets/app_text_button.dart';
 import 'package:budget_planner/widgets/on_boarding_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   @override
@@ -42,16 +43,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           children: [
             Container(
               height: SizeConfig.scaleHeight(10),
-              margin: EdgeInsets.symmetric(
-                horizontal: SizeConfig.scaleWidth(108),
-              ),
+              margin: EdgeInsets.symmetric(horizontal: SizeConfig.scaleWidth(108),),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(5)),
                 child: LinearProgressIndicator(
                   backgroundColor: Colors.grey.shade300,
                   value: (currentIndex + 1) / 3,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                      AppStyleColors.PRIMARY_COLOR),
+                  valueColor: AlwaysStoppedAnimation<Color>(AppStyleColors.PRIMARY_COLOR),
                 ),
               ),
             ),
@@ -65,35 +63,35 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 },
                 children: [
                   OnBoardingWidget(
-                    title: 'Take hold of your finances',
-                    subTitle: 'Managing your finances can be effortless ',
+                    title: AppLocalizations.of(context)!.on_boarding_title_1,
+                    subTitle: AppLocalizations.of(context)!.on_boarding_msg_1,
                     svgIcon: 'on_boarding_image1',
                   ),
                   OnBoardingWidget(
-                    title: 'See where your money goes',
-                    subTitle:
-                        'This app helps your to track your income and expenditure via automatic bank synchronization or manually ',
+                    title: AppLocalizations.of(context)!.on_boarding_title_2,
+                    subTitle: AppLocalizations.of(context)!.on_boarding_msg_2,
                     svgIcon: 'on_boarding_image2',
                   ),
                   OnBoardingWidget(
-                    title: 'Reach your goals with ease',
-                    subTitle:
-                        'Managing your finances can be effortless Budget App makes it a breeze',
+                    title: AppLocalizations.of(context)!.on_boarding_title_3,
+                    subTitle: AppLocalizations.of(context)!.on_boarding_msg_3,
                     svgIcon: 'on_boarding_image3',
                   ),
                 ],
               ),
             ),
             AppElevatedButton(
-              text: currentIndex == 2 ? 'Let\'s start' : 'Next',
+              text: currentIndex == 2 ? AppLocalizations.of(context)!.start_button_label : AppLocalizations.of(context)!.next_button_label,
               fontWeight: FontWeight.bold,
               textColor: Colors.white,
               onPressed: goToNextPage,
+              fontSize: SizeConfig.scaleTextFont(15),
             ),
             AppTextButton(
-              text: 'skip',
+              text: AppLocalizations.of(context)!.skip_button_label,
               textColor: AppStyleColors.GRAY_COLOR,
               onPressed: skip,
+              fontSize: SizeConfig.scaleTextFont(15),
             )
           ],
         ),

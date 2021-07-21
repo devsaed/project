@@ -38,5 +38,8 @@ class CurrencyDbController extends DbOperations<Currency>  {
     return countOfUpdatedRows != 0;
   }
 
+  Future<void> deleteAllRows() async {
+    await database.delete(Currency.TABLE_NAME);
+  }
 
 }

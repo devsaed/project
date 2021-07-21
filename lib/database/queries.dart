@@ -29,7 +29,7 @@ mixin Queries {
         'name TEXT,'
         'email TEXT UNIQUE,'
         'currency_id TINYINT,'
-        'day_limit NUMERIC,'
+        'day_limit REAL,'
         'pin INTEGER'
         ')');
   }
@@ -47,11 +47,11 @@ mixin Queries {
     await dbInstance.execute('CREATE TABLE actions ('
         'id INTEGER PRIMARY KEY AUTOINCREMENT,'
         'amount INTEGER,'
-        'date DATE,'
+        'date TEXT,'
         'expense BOOLEAN,'
         'notes TEXT NULL,'
         'user_id INTEGER,'
-        'category_id INTEGER'
+        'category_id INTEGER,'
         'currency_id INTEGER'
         ')');
   }

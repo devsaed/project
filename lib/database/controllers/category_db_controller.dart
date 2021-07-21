@@ -37,4 +37,8 @@ class CategoryDbController extends DbOperations<Category>{
     return countOfUpdatedRows != 0;
   }
 
+  Future<void> deleteAllRows() async{
+    await database.delete(Category.TABLE_NAME);
+  }
+
 }

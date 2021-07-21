@@ -1,30 +1,34 @@
+import 'package:budget_planner/getx/add_operation_getx_controller.dart';
 import 'package:budget_planner/getx/category_getx_controller.dart';
+import 'package:budget_planner/getx/currency_getx_controller.dart';
 import 'package:budget_planner/models/bn_screen.dart';
 import 'package:budget_planner/screens/bn_screen/category_screen.dart';
 import 'package:budget_planner/screens/bn_screen/home_screen.dart';
 import 'package:budget_planner/screens/bn_screen/tips_screen.dart';
 import 'package:budget_planner/utils/app_style_colors.dart';
+import 'package:budget_planner/utils/size_config.dart';
 import 'package:budget_planner/widgets/app_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'bn_screen/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<MainScreen> {
   int currentIndex = 0;
-  CategoryGetxController controller = Get.put(CategoryGetxController());
+
+  CategoryGetxController categoryGetxController = Get.put(CategoryGetxController());
+  ActionsGetxController actionGetxController = Get.put(ActionsGetxController());
 
   List<BnScreen> screens = <BnScreen>[
     BnScreen(title: 'Home', widget: HomeScreen()),
     BnScreen(title: 'Category', widget: CategoryWithDetailsScreen()),
-    BnScreen(title: 'Category', widget: CategoryWithDetailsScreen()),
+    BnScreen(title: '', widget: CategoryWithDetailsScreen()),
     BnScreen(title: 'Profile', widget: ProfileScreen()),
     BnScreen(title: 'Tips', widget: TipsScreen()),
   ];
@@ -44,16 +48,16 @@ class _HomeScreenState extends State<MainScreen> {
         selectedLabelStyle: TextStyle(
           fontFamily: 'montserrat',
           fontWeight: FontWeight.bold,
-          fontSize: 10,
+          fontSize: SizeConfig.scaleTextFont(10),
         ),
         unselectedLabelStyle: TextStyle(
           fontFamily: 'montserrat',
           fontWeight: FontWeight.bold,
-          fontSize: 10,
+          fontSize: SizeConfig.scaleTextFont(10),
         ),
         items: [
-          createBottomNavigationBarItem(label: 'Home', svgIcon: 'home'),
-          createBottomNavigationBarItem(label: 'Categories', svgIcon: 'category'),
+          createBottomNavigationBarItem(label: AppLocalizations.of(context)!.home , svgIcon: 'home'),
+          createBottomNavigationBarItem(label: AppLocalizations.of(context)!.categories, svgIcon: 'category'),
           BottomNavigationBarItem(
               icon: FloatingActionButton(
                 onPressed: () {
@@ -64,8 +68,8 @@ class _HomeScreenState extends State<MainScreen> {
                 elevation: 0,
               ),
               label: ''),
-          createBottomNavigationBarItem(label: 'Profile', svgIcon: 'person'),
-          createBottomNavigationBarItem(label: 'Tips', svgIcon: 'alert'),
+          createBottomNavigationBarItem(label: AppLocalizations.of(context)!.profile, svgIcon: 'person'),
+          createBottomNavigationBarItem(label: AppLocalizations.of(context)!.tips, svgIcon: 'alert'),
         ],
         onTap: (int index) {
           setState(() {
@@ -77,9 +81,8 @@ class _HomeScreenState extends State<MainScreen> {
         title: AppTextWidget(
           screens[currentIndex].title,
           color: AppStyleColors.PRIMARY_TEXT_COLOR,
-          fontFamily: 'montserrat',
           fontWeight: FontWeight.bold,
-          fontSize: 20,
+          fontSize: SizeConfig.scaleTextFont(20),
         ),
         actions: [
           Visibility(
@@ -88,7 +91,6 @@ class _HomeScreenState extends State<MainScreen> {
               color: AppStyleColors.PRIMARY_COLOR,
               onPressed: () {
                 Navigator.pushNamed(context, '/settings_screen');
-
               },
             ),
             visible: currentIndex == 0,
@@ -118,15 +120,15 @@ BottomNavigationBarItem createBottomNavigationBarItem({
     label: label,
     icon: SvgPicture.asset(
       'assets/svg/$svgIcon.svg',
-      height: 22,
-      width: 22,
+      height: SizeConfig.scaleHeight(22),
+      width: SizeConfig.scaleHeight(22),
       color: AppStyleColors.GRAY_COLOR,
     ),
     activeIcon: SvgPicture.asset(
       'assets/svg/$svgIcon.svg',
       color: AppStyleColors.PRIMARY_COLOR,
-      height: 22,
-      width: 22,
+      height: SizeConfig.scaleHeight(22),
+      width: SizeConfig.scaleHeight(22),
     ),
   );
 }

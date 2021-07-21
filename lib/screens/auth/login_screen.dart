@@ -6,11 +6,11 @@ import 'package:budget_planner/utils/helpers.dart';
 import 'package:budget_planner/utils/size_config.dart';
 import 'package:budget_planner/widgets/app_elevated_button.dart';
 import 'package:budget_planner/widgets/app_text_widget.dart';
+import 'package:budget_planner/widgets/header_widget.dart';
 import 'package:budget_planner/widgets/login_text_field_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -54,62 +54,39 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
           ),
           child: Column(
             children: [
-              Container(
-                height: SizeConfig.scaleHeight(120),
-                width: SizeConfig.scaleHeight(120),
-                padding: EdgeInsets.all(SizeConfig.scaleHeight(30)),
-                child: SvgPicture.asset('assets/svg/wallet.svg'),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(25),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        offset: Offset(0, SizeConfig.scaleHeight(10)),
-                        color: AppStyleColors.SHADOW_COLOR,
-                        blurRadius: SizeConfig.scaleHeight(18),
-                        spreadRadius: 0),
-                  ],
-                ),
-              ),
-              SizedBox(height: SizeConfig.scaleHeight(13)),
+              HeaderWidget(AppLocalizations.of(context)!.login, 'wallet'),
+              SizedBox(height: SizeConfig.scaleHeight(10)),
               AppTextWidget(
-                'LOGIN',
-                color: AppStyleColors.PRIMARY_TEXT_COLOR,
-                textAlign: TextAlign.center,
-                fontWeight: FontWeight.bold,
-                fontSize: SizeConfig.scaleTextFont(20),
-              ),
-              SizedBox(height: 11),
-              AppTextWidget(
-                'Enter your email & pin code to login to your account',
+                AppLocalizations.of(context)!.login_msg,
                 color: AppStyleColors.GRAY_COLOR,
                 textAlign: TextAlign.center,
                 fontSize: SizeConfig.scaleTextFont(15),
               ),
               SizedBox(height: SizeConfig.scaleHeight(50)),
               LoginTextFieldWidget(
-                hint: 'Email address',
+                hint: AppLocalizations.of(context)!.email,
                 controller: emailEditingController,
               ),
               SizedBox(height: SizeConfig.scaleHeight(15)),
               LoginTextFieldWidget(
-                hint: 'Pin code',
+                hint: AppLocalizations.of(context)!.pin,
                 controller: pinCodeEditingController,
+                textInputType: TextInputType.number,
               ),
               SizedBox(height: SizeConfig.scaleHeight(30)),
               AppElevatedButton(
-                text: 'Login',
+                text: AppLocalizations.of(context)!.login,
                 fontSize: SizeConfig.scaleTextFont(15),
                 fontWeight: FontWeight.bold,
                 textColor: Colors.white,
-                onPressed: () async{
+                onPressed: () async {
                   await performLogin();
                 },
               ),
               SizedBox(height: SizeConfig.scaleHeight(20)),
               RichText(
                 text: TextSpan(
-                  text: 'Don’t have an account?',
+                  text: AppLocalizations.of(context)!.create_account_question,
                   style: TextStyle(
                     color: AppStyleColors.GRAY_COLOR,
                     fontFamily: 'montserrat',
@@ -118,11 +95,12 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
                   children: [
                     TextSpan(
                       recognizer: recognizer,
-                      text: ' Create Now!',
+                      text: AppLocalizations.of(context)!.create_account,
                       style: TextStyle(
-                          color: AppStyleColors.PRIMARY_COLOR,
-                          fontFamily: 'montserrat',
-                          fontSize: SizeConfig.scaleTextFont(15)),
+                        color: AppStyleColors.PRIMARY_TEXT_COLOR,
+                        fontFamily: 'montserrat',
+                        fontSize: SizeConfig.scaleTextFont(15),
+                      ),
                     )
                   ],
                 ),
@@ -134,30 +112,28 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
     );
   }
 
-  Future<void> performLogin() async{
+  Future<void> performLogin() async {
     if (checkData()) {
       await login();
     }
   }
 
   bool checkData() {
-    if (emailEditingController.text.isNotEmpty &&
-        pinCodeEditingController.text.isNotEmpty) {
+    if (emailEditingController.text.isNotEmpty && pinCodeEditingController.text.isNotEmpty) {
       return true;
     }
-    showSnackBar(context, message: 'Please, enter required data', error: true);
+    showSnackBar(context, message: AppLocalizations.of(context)!.empty_field_error, error: true);
     return false;
   }
 
   Future login() async {
-    User? user = await UserDbController().login(
-        email: emailEditingController.text,
-        pin: pinCodeEditingController.text);
+    User? user = await UserDbController().login(email: emailEditingController.text, pin: pinCodeEditingController.text);
     if (user != null) {
+      showSnackBar(context, message: AppLocalizations.of(context)!.login_successfully);
       SharedPrefController().save(user);
-      Navigator.pushNamedAndRemoveUntil(
-          context, '/main_screen', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, '/main_screen', (route) => false);
+    } else{
+      showSnackBar(context, message: AppLocalizations.of(context)!.invalid_email_or_pin, error: true);
     }
   }
-
 }

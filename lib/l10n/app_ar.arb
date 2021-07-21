@@ -1,1 +1,93 @@
-{}
+{
+  "app_name" : "Budget Planner",
+
+  "on_boarding_title_1" : "سيطر وتحكم بأموالك",
+  "on_boarding_title_2" : "أنظر أين تذهب أموالك",
+  "on_boarding_title_3" : "حقق أهدافك بسهولة",
+  "on_boarding_msg_1" : "يمكن أن تكون إدارة أموالك سهلة",
+  "on_boarding_msg_2" : "يساعدك هذا التطبيق على تتبع دخلك ونفقاتك عبر المزامنة المصرفية التلقائية أو يدوياً",
+  "on_boarding_msg_3" : "يمكن أن تكون إدارة أموالك سهلة تطبيق الميزانية يجعله نسيمًا",
+  "start_button_label" : "هيا لنبدأ",
+  "next_button_label" : "التالي",
+  "skip_button_label" : "تخطي",
+
+
+  "login" : "تسجيل الدخول",
+  "login_msg" : "أدخل بريدك الإلكتروني والرمز السري لتسجيل الدخول إلى حسابك",
+  "email" : "البريد الإلكتروني",
+  "pin" : "الرمز السري",
+  "create_account_question" : "ليس لديك حساب؟  ",
+  "create_account" : "انشئ الأن!",
+  "empty_field_error" : "من فضلك قم بتعبئة جميع الحقول",
+  "login_successfully" : "تم تسجيل الدخول بنجاح",
+  "invalid_email_or_pin" : "البريد الالكتروني او الرمز السري غير صحيح ",
+
+
+
+
+  "get_start" : "انشئ الأن!",
+  "create_account_message" : "يستغرق الأمر دقيقة واحدة فقط للبدء في السيطرة والتحكم أموالك",
+  "name" : "الإسم",
+  "currency" : "العملة",
+  "daily_limit" : "الحد اليومي",
+  "set_your_pin" : "انشئ الرمز السري الخاص بك",
+  "change_your_pin" : " تغيير الرمز السري الخاص بك",
+  "none" : "فارغ",
+  "account_created_successfully" : "تم انشاء الحساب بنجاح",
+
+
+
+  "enter_passcode" : "أدخل رمز المرور",
+  "new_pin" : "رمز سري جديد",
+  "apply" : "تطبيق",
+  "pin_is_not_completed_error" : " من فضلك قم بكتابة الرقم السري بشكل صحيح",
+
+
+  "congratulations" : "تهانينا!",
+  "you_have_registered" : "لقد قمت بالتسجيل",
+
+
+  "last_actions" : "آخر الحركات",
+  "spent_today" : "لقد أنفقت اليوم",
+  "balance_for_today" : "رصيد اليوم",
+  "see_more" : "المزيد",
+  "home" : "الصفحة الرئيسية",
+  "categories" : "التصنيفات",
+  "profile" : "الملف الشخصي",
+  "tips" : "النصائح",
+
+  "expense_details" : "التفاصيل",
+  "expenses" : "المصروفات",
+  "incomes" : "الواردات",
+  "date" : "التاريخ",
+
+
+  "action" : "الحركات",
+
+
+  "add_category" : "أضافة تصنيف",
+  "enter_category_name" : " ادخل اسم أضافة التصنيف",
+  "add" : "أضافة",
+  "save" : "حفظ",
+  "category_created_successfully" : "تم انشاء التصنيف بنجاح",
+  "category_created_field" : "فشل في انشاء التصنيف ",
+  "note" : " الملاحظات",
+
+
+  "add_operation" : "أضافة عملية",
+  "success_add_operation" : "تم انشاء العملية بنجاح",
+  "failed_add_operation" : "فشل في انشاء العملية",
+  "well_done" : "أحسنت",
+
+  "settings" : "الإعدادات",
+  "general" : "عام",
+  "about_app" : "عن التطبيق",
+  "language" : "اللغة",
+  "logout" : "تسجيل الخروج",
+  "account_and_data" : "الحساب والبيانات",
+  "clear_account_data" : "مسح بيانات الحساب",
+  "delete_account" : "إزالة/حذف الحساب",
+  "deleted_message" : "هل انت متاكد انك تريد حذف البيانات الخاصة بالحساب",
+  "yes" : "YES",
+  "no" : "NO"
+}

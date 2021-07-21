@@ -5,9 +5,9 @@ import 'package:budget_planner/models/currency.dart';
 import 'package:get/get.dart';
 
 class CategoryGetxController extends GetxController {
-
   List<Category> category = <Category>[];
   CategoryDbController dbController = CategoryDbController();
+
   static CategoryGetxController get to => Get.find();
 
   @override
@@ -22,11 +22,6 @@ class CategoryGetxController extends GetxController {
     super.onClose();
   }
 
-  // Future<void> readCurrencies() async {
-  //   currencies = await dbController.read();
-  //   update();
-  // }
-
   Future<void> readCategory() async {
     category = await dbController.read();
     update();
@@ -34,7 +29,7 @@ class CategoryGetxController extends GetxController {
 
   Future<bool> createCategory(Category newCategory) async {
     int id = await dbController.create(newCategory);
-    if(id != 0){
+    if (id != 0) {
       newCategory.id = id;
       category.add(newCategory);
       update();
@@ -45,9 +40,10 @@ class CategoryGetxController extends GetxController {
 
   Future<bool> updateCategory(Category updatedCategory) async {
     bool updated = await dbController.update(updatedCategory);
-    if(updated){
-      int index = category.indexWhere((element) => element.id == updatedCategory.id);
-      if(index != -1){
+    if (updated) {
+      int index =
+          category.indexWhere((element) => element.id == updatedCategory.id);
+      if (index != -1) {
         category[index] = updatedCategory;
         update();
         return true;
@@ -55,4 +51,10 @@ class CategoryGetxController extends GetxController {
     }
     return false;
   }
+
+  Future<void> deleteAllRows() async {
+    await dbController.deleteAllRows();
+    category.clear();
+  }
+
 }

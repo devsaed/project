@@ -7,8 +7,10 @@ import 'package:budget_planner/widgets/currency_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CurrencyScreen extends StatelessWidget {
+
 
   @override
   Widget build(BuildContext context) {
@@ -16,53 +18,53 @@ class CurrencyScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: AppTextWidget(
-          'Currency',
+          AppLocalizations.of(context)!.currency,
           color: AppStyleColors.PRIMARY_TEXT_COLOR,
           fontWeight: FontWeight.bold,
           fontSize: SizeConfig.scaleHeight(20),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsetsDirectional.only(
+      body: Container(
+        clipBehavior: Clip.antiAlias,
+        margin: EdgeInsetsDirectional.only(
           top: SizeConfig.scaleHeight(100),
           start: SizeConfig.scaleWidth(20),
           end: SizeConfig.scaleWidth(20),
         ),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: SizeConfig.scaleWidth(15)),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(25)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  offset: Offset(0, SizeConfig.scaleHeight(10)),
-                  color: AppStyleColors.SHADOW_COLOR,
-                  blurRadius: SizeConfig.scaleHeight(18),
-                  spreadRadius: 0),
-            ],
-          ),
-          child: GetBuilder<CurrencyGetxController>(
-            init: CurrencyGetxController(),
-            builder: (CurrencyGetxController controller){
-              return ListView.separated(
-                itemCount: controller.currencies.length,
-                shrinkWrap: true,
-                padding: EdgeInsets.zero,
-                itemBuilder: (context, index) {
-                  return CurrencyWidget(
-                      currency: controller.currencies[index],
-                      onTap: () {
-                        popScreen(controller.currencies[index], context);
-                      },
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Divider(height: 0, color: AppStyleColors.GRAY_COLOR);
-                },
-              );
-            },
-
-          ),
+        padding: EdgeInsets.symmetric(
+          horizontal: SizeConfig.scaleWidth(15),
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(25)),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              offset: Offset(0, SizeConfig.scaleHeight(10)),
+              color: AppStyleColors.SHADOW_COLOR,
+              blurRadius: SizeConfig.scaleHeight(18),
+              spreadRadius: 0,
+            ),
+          ],
+        ),
+        child: GetBuilder<CurrencyGetxController>(
+          builder: (CurrencyGetxController controller) {
+            return ListView.separated(
+              itemCount: controller.currencies.length,
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
+              itemBuilder: (context, index) {
+                return CurrencyWidget(
+                  currency: controller.currencies[index],
+                  onTap: () {
+                    popScreen(controller.currencies[index], context);
+                  },
+                );
+              },
+              separatorBuilder: (context, index) {
+                return Divider(height: 0, color: AppStyleColors.GRAY_COLOR);
+              },
+            );
+          },
         ),
       ),
     );

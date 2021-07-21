@@ -1,14 +1,15 @@
 import 'package:budget_planner/utils/app_style_colors.dart';
+import 'package:budget_planner/utils/size_config.dart';
 import 'package:budget_planner/widgets/app_text_widget.dart';
 import 'package:flutter/material.dart';
 
-class ProfileWidget extends StatelessWidget {
+class MainContainerWidget extends StatelessWidget {
   final String title;
   final String? value;
   final IconData? iconData;
   final void Function()? onTap;
 
-  ProfileWidget({
+  MainContainerWidget({
     required this.title,
     this.value,
     this.onTap,
@@ -18,37 +19,35 @@ class ProfileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap ?? () {
-        print('nothing!');
-      },
+      onTap: onTap ??
+          () {
+            print('nothing!');
+          },
       child: Container(
         color: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 23),
-
+        padding: EdgeInsets.symmetric(vertical: SizeConfig.scaleHeight(23)),
         child: Row(
           children: [
             AppTextWidget(
               title,
-              fontFamily: 'montserrat',
               fontWeight: FontWeight.w500,
-              fontSize: 15,
+              fontSize: SizeConfig.scaleTextFont(15),
               color: AppStyleColors.BLOCK_COLOR,
             ),
             Spacer(),
             AppTextWidget(
-              value??'',
-              fontFamily: 'montserrat',
+              value ?? '',
               fontWeight: FontWeight.normal,
-              fontSize: 15,
+              fontSize: SizeConfig.scaleTextFont(15),
               color: AppStyleColors.GRAY_COLOR,
             ),
             iconData != null
                 ? Icon(
                     Icons.arrow_forward_ios,
-                    size: 13,
+                    size: SizeConfig.scaleHeight(13),
                     color: AppStyleColors.GRAY_COLOR,
                   )
-                : Container()
+                : Container(),
           ],
         ),
       ),

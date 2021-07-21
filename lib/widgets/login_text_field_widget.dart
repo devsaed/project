@@ -8,12 +8,14 @@ class LoginTextFieldWidget extends StatelessWidget {
   final bool isPassword;
   final String? errorMsg;
   final IconData? prefixIcon;
+  final TextInputType textInputType;
 
   LoginTextFieldWidget(
       {required this.hint,
       required this.controller,
       this.errorMsg,
       this.prefixIcon,
+      this.textInputType = TextInputType.text,
       this.isPassword = false});
 
   @override
@@ -32,18 +34,15 @@ class LoginTextFieldWidget extends StatelessWidget {
         ],
       ),
       child: TextField(
-
+        keyboardType: textInputType,
         controller: controller,
-        // maxLines: null,
-        // minLines: null,
-        // expands: true,
         style: TextStyle(
           fontWeight: FontWeight.w600,
           color: AppStyleColors.PRIMARY_TEXT_COLOR,
           fontSize: SizeConfig.scaleTextFont(15),
         ),
         decoration: InputDecoration(
-          prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
+          prefixIcon: prefixIcon != null ? Icon(prefixIcon,color: AppStyleColors.PRIMARY_TEXT_COLOR,) : null,
           errorText: errorMsg,
           border: InputBorder.none,
           hintText: hint,

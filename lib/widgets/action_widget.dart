@@ -1,13 +1,13 @@
-import 'package:budget_planner/models/currency.dart';
-import 'package:budget_planner/prefrencess/shared_pref_controller.dart';
+import 'package:budget_planner/models/actions.dart';
 import 'package:budget_planner/utils/app_style_colors.dart';
 import 'package:flutter/material.dart';
 
-class CurrencyWidget extends StatelessWidget {
-  final Currency currency;
+class ActionWidget extends StatelessWidget {
+
+  final Operation operation;
   final void Function() onTap;
 
-  CurrencyWidget({required this.currency, required this.onTap});
+  ActionWidget({required this.operation, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +20,16 @@ class CurrencyWidget extends StatelessWidget {
           children: [
             CircleAvatar(
               child: Text(
-                SharedPrefController().languageCode == 'ar' ? currency.nameAr[0]: currency.nameEn[0],
+                operation.categoryId.toString(),
                 style: TextStyle(color: Colors.white),
               ),
               backgroundColor: AppStyleColors.PRIMARY_COLOR,
               radius: 20,
             ),
             SizedBox(width: 15),
-            Text(
-                SharedPrefController().languageCode == 'ar' ? currency.nameAr: currency.nameEn
-            ),
+            Text(operation.categoryId.toString()),
+            Spacer(),
+            Text(operation.amount.toString())
           ],
         ),
       ),

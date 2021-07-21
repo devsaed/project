@@ -38,21 +38,24 @@ class CreateAccountTextField extends StatelessWidget {
             child: TextField(
               controller: controller,
               keyboardType: inputType,
-              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.end,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: hint,
-                hintTextDirection: TextDirection.rtl,
+                // hintTextDirection: TextDirection.rtl,
                 hintStyle: TextStyle(
                   color: AppStyleColors.GRAY_COLOR,
                   fontSize: SizeConfig.scaleTextFont(15),
+                  fontFamily: 'montserrat',
                 ),
               ),
               style: TextStyle(
-                color: AppStyleColors.PRIMARY_COLOR,
+                color: AppStyleColors.PRIMARY_TEXT_COLOR,
                 fontSize: SizeConfig.scaleTextFont(15),
                 fontWeight: FontWeight.w500,
+                fontFamily: 'montserrat',
               ),
+
             ),
           ),
         ],

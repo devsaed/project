@@ -1,19 +1,18 @@
 import 'package:budget_planner/database/controllers/user_db_controller.dart';
 import 'package:budget_planner/models/currency.dart';
 import 'package:budget_planner/models/user.dart';
-import 'package:budget_planner/prefrencess/shared_pref_controller.dart';
+import 'package:budget_planner/screens/auth/create_account_success.dart';
 import 'package:budget_planner/screens/currency_screen.dart';
-import 'package:budget_planner/screens/success_screen.dart';
 import 'package:budget_planner/utils/app_style_colors.dart';
 import 'package:budget_planner/utils/helpers.dart';
 import 'package:budget_planner/utils/size_config.dart';
 import 'package:budget_planner/widgets/app_elevated_button.dart';
 import 'package:budget_planner/widgets/app_text_widget.dart';
 import 'package:budget_planner/widgets/create_account_text_filed.dart';
-import 'package:budget_planner/widgets/profile_widget.dart';
+import 'package:budget_planner/widgets/header_widget.dart';
+import 'package:budget_planner/widgets/main_container_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'bin_code_screen.dart';
 
 class CreateAccountScreen extends StatefulWidget {
@@ -21,7 +20,8 @@ class CreateAccountScreen extends StatefulWidget {
   _CreateAccountScreenState createState() => _CreateAccountScreenState();
 }
 
-class _CreateAccountScreenState extends State<CreateAccountScreen> with Helpers{
+class _CreateAccountScreenState extends State<CreateAccountScreen>
+    with Helpers {
   late TextEditingController userNameController;
   late TextEditingController emailController;
   late TextEditingController dallyLimitController;
@@ -58,35 +58,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> with Helpers{
           ),
           child: Column(
             children: [
-              Container(
-                height: SizeConfig.scaleHeight(120),
-                width: SizeConfig.scaleHeight(120),
-                padding: EdgeInsets.all(SizeConfig.scaleHeight(30)),
-                child: SvgPicture.asset('assets/svg/wallet.svg'),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius:
-                      BorderRadius.circular(SizeConfig.scaleHeight(25)),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        offset: Offset(0, SizeConfig.scaleHeight(10)),
-                        color: AppStyleColors.SHADOW_COLOR,
-                        blurRadius: SizeConfig.scaleHeight(18),
-                        spreadRadius: 0),
-                  ],
-                ),
-              ),
-              SizedBox(height: SizeConfig.scaleHeight(13)),
-              AppTextWidget(
-                'Get Started',
-                color: AppStyleColors.PRIMARY_TEXT_COLOR,
-                textAlign: TextAlign.center,
-                fontWeight: FontWeight.bold,
-                fontSize: SizeConfig.scaleTextFont(20),
-              ),
+              HeaderWidget(AppLocalizations.of(context)!.get_start, 'wallet'),
               SizedBox(height: 11),
               AppTextWidget(
-                'It only takes a minute to start taking hold of your finances',
+                AppLocalizations.of(context)!.create_account_message,
                 color: AppStyleColors.GRAY_COLOR,
                 textAlign: TextAlign.center,
                 fontSize: SizeConfig.scaleTextFont(15),
@@ -118,9 +93,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> with Helpers{
                   children: [
                     CreateAccountTextField(
                       controller: userNameController,
-                      hint: 'None',
-                      prefix: 'Name:',
-
+                      hint: AppLocalizations.of(context)!.none,
+                      prefix: AppLocalizations.of(context)!.name,
                     ),
                     Divider(
                       height: 0,
@@ -128,13 +102,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> with Helpers{
                     ),
                     CreateAccountTextField(
                       controller: emailController,
-                      hint: 'None',
+                      hint: AppLocalizations.of(context)!.none,
+                      prefix: AppLocalizations.of(context)!.email,
                       inputType: TextInputType.emailAddress,
-                      prefix: 'Email Address:',
                     ),
-                    Divider(height: 0, color: AppStyleColors.GRAY_COLOR),
-                    ProfileWidget(
-                      title: 'Currency',
+                    Divider(
+                      height: 0,
+                      color: AppStyleColors.GRAY_COLOR,
+                    ),
+                    MainContainerWidget(
+                      title: AppLocalizations.of(context)!.currency,
                       value: currency == null ? '' : currency!.nameEn,
                       iconData: Icons.arrow_forward_ios,
                       onTap: () async {
@@ -149,16 +126,22 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> with Helpers{
                         });
                       },
                     ),
-                    Divider(height: 0, color: AppStyleColors.GRAY_COLOR),
+                    Divider(
+                      height: 0,
+                      color: AppStyleColors.GRAY_COLOR,
+                    ),
                     CreateAccountTextField(
                       controller: dallyLimitController,
                       hint: '500',
-                      prefix: 'Daily limit',
+                      prefix: AppLocalizations.of(context)!.daily_limit,
                       inputType: TextInputType.number,
                     ),
-                    Divider(height: 0, color: AppStyleColors.GRAY_COLOR),
-                    ProfileWidget(
-                        title: 'Set your pin',
+                    Divider(
+                      height: 0,
+                      color: AppStyleColors.GRAY_COLOR,
+                    ),
+                    MainContainerWidget(
+                        title: AppLocalizations.of(context)!.set_your_pin,
                         value: binCode,
                         iconData: Icons.arrow_forward_ios,
                         onTap: () async {
@@ -176,11 +159,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> with Helpers{
                 ),
               ),
               AppElevatedButton(
-                text: 'Create Account',
+                text: AppLocalizations.of(context)!.create_account,
                 fontSize: SizeConfig.scaleTextFont(15),
                 fontWeight: FontWeight.bold,
                 textColor: Colors.white,
-                onPressed: () async{
+                onPressed: () async {
                   await performRegister();
                 },
               ),
@@ -191,26 +174,23 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> with Helpers{
     );
   }
 
-  Future<void> performRegister() async{
-    if(checkData()){
+  Future<void> performRegister() async {
+    if (checkData()) {
       await register();
     }
   }
 
-  register() async{
+  register() async {
     User newUser = user;
     int newUserId = await UserDbController().create(newUser);
     if (newUserId != 0) {
       newUser.id = newUserId;
-      SharedPrefController().save(newUser);
-      print(newUser.display());
-
+      showSnackBar(context, message: 'Account Created Successfully!');
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => CreateAccountSuccessScreen(),
-        ),
-      );
+        ));
     }
   }
 
@@ -220,15 +200,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> with Helpers{
         dallyLimitController.text.isNotEmpty &&
         binCode != null &&
         currency != null) {
-
       return true;
     }
 
-    print(userNameController.text + '   '+emailController.text+'   '+ dallyLimitController.text + '   '+binCode! +'    ' + currency!.nameEn);
-    showSnackBar(context, message: 'Please, Enter All Fields!', error: true);
+    showSnackBar(context, message: AppLocalizations.of(context)!.empty_field_error , error: true);
     return false;
   }
-
 
   User get user {
     User user = User();

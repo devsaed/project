@@ -36,7 +36,11 @@ class AppElevatedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         minimumSize: Size(double.infinity, SizeConfig.scaleHeight(60)),
         primary: buttonColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(30))),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            SizeConfig.scaleHeight(30),
+          ),
+        ),
       ),
       onPressed: onPressed,
     );

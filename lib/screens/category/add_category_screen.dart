@@ -6,10 +6,12 @@ import 'package:budget_planner/utils/size_config.dart';
 import 'package:budget_planner/widgets/app_elevated_button.dart';
 import 'package:budget_planner/widgets/app_text_widget.dart';
 import 'package:budget_planner/widgets/category_type_widget.dart';
+import 'package:budget_planner/widgets/general_text_field.dart';
+import 'package:budget_planner/widgets/header_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddCategoryScreen extends StatefulWidget {
   @override
@@ -20,8 +22,6 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> with Helpers {
   int expensesSelected = 0;
   int incomeSelected = 0;
   late TextEditingController textEditingController;
-  CategoryGetxController controller = Get.find();
-
 
   @override
   void initState() {
@@ -31,44 +31,23 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> with Helpers {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(right: 20, left: 20, top: 80),
+          padding: EdgeInsetsDirectional.only(
+            start: SizeConfig.scaleWidth(20),
+            end: SizeConfig.scaleWidth(20),
+            top: SizeConfig.scaleHeight(80),
+          ),
           child: Column(
             children: [
-              Container(
-                height: 120,
-                width: 120,
-                padding: EdgeInsets.all(30),
-                child: SvgPicture.asset('assets/svg/wallet.svg'),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(25),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        offset: Offset(0, 10),
-                        color: AppStyleColors.SHADOW_COLOR,
-                        blurRadius: 18,
-                        spreadRadius: 0),
-                  ],
-                ),
-              ),
-              SizedBox(height: 13),
-              AppTextWidget(
-                'Add Category',
-                color: AppStyleColors.PRIMARY_TEXT_COLOR,
-                textAlign: TextAlign.center,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-              SizedBox(height: 50),
+              HeaderWidget(AppLocalizations.of(context)!.add_category, 'wallet'),
+              SizedBox(height: SizeConfig.scaleHeight(50)),
               Row(
                 children: [
                   CategoryTypeWidget(
-                    title: 'Expenses',
+                    title: AppLocalizations.of(context)!.expenses,
                     index: expensesSelected,
                     icon: Icon(
                       Icons.arrow_upward_sharp,
@@ -82,10 +61,10 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> with Helpers {
                     },
                   ),
                   SizedBox(
-                    width: 10,
+                    width: SizeConfig.scaleWidth(10),
                   ),
                   CategoryTypeWidget(
-                    title: 'Income',
+                    title: AppLocalizations.of(context)!.incomes,
                     index: incomeSelected,
                     icon: Icon(
                       Icons.arrow_downward_rounded,
@@ -100,48 +79,19 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> with Helpers {
                   ),
                 ],
               ),
-
-              //TODO refactoring
-              Container(
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        offset: Offset(0, 0),
-                        color: Colors.black.withOpacity(0.16),
-                        blurRadius: 6,
-                        spreadRadius: 0),
-                  ],
-                ),
-                child: TextField(
+              SizedBox(height: SizeConfig.scaleHeight(10),),
+              GeneralTextField(
                   controller: textEditingController,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: AppStyleColors.PRIMARY_TEXT_COLOR,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: 'Enter category name',
-                    border: InputBorder.none,
-                    errorStyle: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      color: Colors.red.shade900,
-                    ),
-                    hintStyle: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      color: AppStyleColors.GRAY_COLOR,
-                    ),
-                  ),
-                ),
-              ),
+                  hint: AppLocalizations.of(context)!.enter_category_name,
+                  height: SizeConfig.scaleHeight(67)),
+
               SizedBox(
-                height: 10,
+                height: SizeConfig.scaleHeight(10),
               ),
+
               AppElevatedButton(
-                text: 'Add',
-                // fontSize: SizeConfig.scaleTextFont(15),
+                text: AppLocalizations.of(context)!.add,
+                fontSize: SizeConfig.scaleTextFont(15),
                 fontWeight: FontWeight.bold,
                 textColor: Colors.white,
                 onPressed: () async {
@@ -158,6 +108,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> with Helpers {
   Future performSave() async {
     if (checkData()) {
       await save();
+      Navigator.pop(context);
     }
   }
 
@@ -165,21 +116,14 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> with Helpers {
     if (textEditingController.text.isNotEmpty && categorySelect()) {
       return true;
     }
-    showSnackBar(context, message: 'enter the all field', error: true);
+    showSnackBar(context, message: AppLocalizations.of(context)!.empty_field_error, error: true);
     return false;
   }
 
-  bool categorySelect(){
-    if(incomeSelected == 0){
-      if(expensesSelected == 0){
-        return false;
-      }
-    }
-    return true;
-  }
   Future save() async {
     bool created = await CategoryGetxController.to.createCategory(category);
-    String message = created ? 'Created Successfully' : 'Failed to create category';
+    String message =
+        created ?  AppLocalizations.of(context)!.category_created_successfully : AppLocalizations.of(context)!.category_created_field;
     showSnackBar(context, message: message, error: !created);
   }
 
@@ -188,5 +132,14 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> with Helpers {
     category.name = textEditingController.text;
     category.expense = expensesSelected == 1;
     return category;
+  }
+
+  bool categorySelect() {
+    if (incomeSelected == 0) {
+      if (expensesSelected == 0) {
+        return false;
+      }
+    }
+    return true;
   }
 }

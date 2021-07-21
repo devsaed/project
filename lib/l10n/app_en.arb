@@ -1,1 +1,94 @@
-{}
+{
+  "app_name" : "Budget Planner",
+
+  "on_boarding_title_1" : "Take hold of your finances",
+  "on_boarding_title_2" : "See where your money goes",
+  "on_boarding_title_3" : "Reach your goals with ease",
+  "on_boarding_msg_1" : "Managing your finances can be effortless",
+  "on_boarding_msg_2" : "This app helps you to track your income and expenditure via automatic bank synchronization or manually",
+  "on_boarding_msg_3" : "Managing your finances can be effortless Budget App makes it a breeze",
+  "start_button_label" : "Let's start",
+  "next_button_label" : "Next",
+  "skip_button_label" : "Skip",
+
+
+  "login" : "LOGIN",
+  "login_msg" : "Enter your email & pin code to log in to your account",
+  "email" : "Email address",
+  "pin" : "Pin code",
+  "create_account_question" : "Don’t have an account?  ",
+  "create_account" : "Create Now!",
+  "empty_field_error" : "Please, Enter Required Data!",
+  "login_successfully" : "Login Successfully!",
+  "invalid_email_or_pin" : "Email or Pin Code Invalid!",
+
+
+
+  "get_start" : "Get Started",
+  "create_account_message" : "It only takes a minute to start taking hold of your finances",
+  "name" : "Name",
+  "currency" : "Currency",
+  "daily_limit" : "Daily limit",
+  "set_your_pin" : "Set your pin",
+  "change_your_pin" : "Change your pin",
+  "none" : "None",
+  "account_created_successfully" : "Account Created Successfully!",
+
+
+
+  "enter_passcode" : "Enter Passcode",
+  "new_pin" : "New PIN",
+  "apply" : "Apply",
+  "pin_is_not_completed_error" : "complete bin code please!",
+
+
+  "congratulations" : "Congratulations!",
+  "you_have_registered" : "You have registered",
+
+
+  "last_actions" : "Last actions",
+  "spent_today" : "Spent Today",
+  "balance_for_today" : "Balance for Today",
+  "see_more" : "See more",
+  "home" : "Home",
+  "categories" : "categories",
+  "profile" : "Profile",
+  "tips" : "Tips",
+
+  "expense_details" : "Details",
+  "expenses" : "Expenses",
+  "incomes" : "Incomes",
+  "date" : "Date",
+
+
+  "action" : "Action",
+
+
+  "add_category" : "Add Category",
+  "enter_category_name" : "Enter category name",
+  "add" : "Add",
+  "save" : "Save",
+  "category_created_successfully" : "Created Successfully'",
+  "category_created_field" : "Failed to create category",
+  "note" : "Notes",
+
+
+  "add_operation" : "Add Operation",
+  "success_add_operation" : "Your operation has been added",
+  "failed_add_operation" : "Failed to create operation",
+  "well_done" : "Well done!",
+
+
+
+  "settings" : "Settings",
+  "general" : "General",
+  "about_app" : "About App",
+  "language" : "Language",
+  "logout" : "Logout",
+  "account_and_data" : "Account & Data",
+  "clear_account_data" : "Clear account data",
+  "delete_account" : "Remove account",
+  "deleted_message" : "Are you sure you want to delete your account data",
+  "yes" : "YES",
+  "no" : "NO"
+}

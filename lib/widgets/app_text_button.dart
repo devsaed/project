@@ -40,9 +40,8 @@ class AppTextButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
         ),
       ),
-      onPressed: (){
-        onPressed();
-      },
+      onPressed: onPressed
+
     );
   }
 }

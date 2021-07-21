@@ -1,25 +1,23 @@
 import 'package:budget_planner/utils/app_style_colors.dart';
 import 'package:budget_planner/utils/helpers.dart';
+import 'package:budget_planner/utils/size_config.dart';
 import 'package:budget_planner/widgets/app_elevated_button.dart';
 import 'package:budget_planner/widgets/app_text_widget.dart';
 import 'package:budget_planner/widgets/bin_code_input_widget.dart';
 import 'package:budget_planner/widgets/bin_code_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BinCodeScreen extends StatefulWidget {
   @override
   _BinCodeScreenState createState() => _BinCodeScreenState();
 }
 
-class _BinCodeScreenState extends State<BinCodeScreen> with Helpers{
+class _BinCodeScreenState extends State<BinCodeScreen> with Helpers {
   String? number1;
-
   String? number2;
-
   String? number3;
-
   String? number4;
-
   String? code;
 
   @override
@@ -28,20 +26,20 @@ class _BinCodeScreenState extends State<BinCodeScreen> with Helpers{
       extendBodyBehindAppBar: true,
       body: Column(
         children: [
-          Padding(padding: EdgeInsets.only(top: 120)),
+          Padding(padding: EdgeInsets.only(top: SizeConfig.scaleHeight(120))),
           AppTextWidget(
-            'Enter Passcode',
+            AppLocalizations.of(context)!.enter_passcode,
             color: AppStyleColors.PRIMARY_COLOR,
-            fontFamily: 'montserrat',
-            fontSize: 20,
+            fontSize: SizeConfig.scaleTextFont(20),
             fontWeight: FontWeight.bold,
           ),
-          AppTextWidget('New PIN',
-              color: AppStyleColors.GRAY_COLOR,
-              fontFamily: 'montserrat',
-              fontSize: 15),
+          AppTextWidget(
+            AppLocalizations.of(context)!.new_pin,
+            color: AppStyleColors.GRAY_COLOR,
+            fontSize: SizeConfig.scaleTextFont(15),
+          ),
           SizedBox(
-            height: 20,
+            height: SizeConfig.scaleHeight(20),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -65,7 +63,7 @@ class _BinCodeScreenState extends State<BinCodeScreen> with Helpers{
             ],
           ),
           SizedBox(
-            height: 30,
+            height: SizeConfig.scaleHeight(30),
           ),
           Container(
             alignment: Alignment.center,
@@ -156,8 +154,15 @@ class _BinCodeScreenState extends State<BinCodeScreen> with Helpers{
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SizedBox(
-                      width: 98,
+                    Visibility(
+                      child: BinCodeWidget(
+                        onTap: () {},
+                        number: '',
+                      ),
+                      maintainSize: true,
+                      maintainAnimation: true,
+                      maintainState: true,
+                      visible: false,
                     ),
                     BinCodeWidget(
                       number: '0',
@@ -183,15 +188,19 @@ class _BinCodeScreenState extends State<BinCodeScreen> with Helpers{
           ),
           Spacer(),
           Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, bottom: 80),
+            padding: EdgeInsetsDirectional.only(
+              start: SizeConfig.scaleWidth(20),
+              end: SizeConfig.scaleWidth(20),
+              bottom: SizeConfig.scaleHeight(80),
+            ),
             child: AppElevatedButton(
-              text: 'Apply',
+              text: AppLocalizations.of(context)!.apply,
               fontWeight: FontWeight.bold,
               textColor: Colors.white,
               onPressed: () {
-                if(getCode(context)){
+                if (getCode(context)) {
                   // Navigator.pushNamed(context, '/main_screen');
-                  Navigator.pop(context,code);
+                  Navigator.pop(context, code);
                 }
               },
             ),
@@ -225,7 +234,7 @@ class _BinCodeScreenState extends State<BinCodeScreen> with Helpers{
     }
   }
 
-   bool getCode(BuildContext context) {
+  bool getCode(BuildContext context) {
     if (number1 != null &&
         number2 != null &&
         number3 != null &&
@@ -233,7 +242,7 @@ class _BinCodeScreenState extends State<BinCodeScreen> with Helpers{
       code = number1! + number2! + number3! + number4!;
       return true;
     } else {
-      showSnackBar(context, message: 'complete bin code please!', error:  true);
+      showSnackBar(context, message: AppLocalizations.of(context)!.pin_is_not_completed_error, error: true);
       return false;
     }
   }

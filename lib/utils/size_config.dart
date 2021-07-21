@@ -33,17 +33,17 @@ class SizeConfig {
   }
 
   static double scaleTextFont(double fontSize) {
-    double scale = fontSize / 8.96;
+    double scale = fontSize / 9.76;
     return (_textMultiplier! * scale);
   }
 
   static double scaleWidth(double width) {
-    double scale = width / 3.75;
+    double scale = width / 4.14;
     return (_widthMultiplier! * scale);
   }
 
   static double scaleHeight(double height) {
-    double scale = height / 8.12;
+    double scale = height / 8.96;
     return (_heightMultiplier! * scale);
   }
 }
