@@ -34,8 +34,7 @@ class _CreateOperationSuccessState extends State<CreateOperationSuccess> {
                   vertical: SizeConfig.scaleHeight(24)),
               margin: EdgeInsets.only(bottom: SizeConfig.scaleHeight(30)),
               decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(SizeConfig.scaleHeight(25)),
+                  borderRadius: BorderRadius.circular(SizeConfig.scaleHeight(25)),
                   color: Colors.white,
                   boxShadow: <BoxShadow>[
                     BoxShadow(

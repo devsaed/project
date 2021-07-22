@@ -2,6 +2,7 @@ import 'package:budget_planner/utils/size_config.dart';
 import 'package:budget_planner/widgets/app_text_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 mixin Helpers {
   void showSnackBar(BuildContext context,
@@ -47,7 +48,7 @@ mixin Helpers {
                   Navigator.pop(context, false);
                 },
                 child: AppTextWidget(
-                  'NO',
+                  AppLocalizations.of(context)!.no,
                   fontSize: SizeConfig.scaleTextFont(12),
                   fontWeight: FontWeight.w600,
                 ),
@@ -57,7 +58,7 @@ mixin Helpers {
                   Navigator.pop(context, true);
                 },
                 child: AppTextWidget(
-                  'YES',
+                  AppLocalizations.of(context)!.yes,
                   fontSize: SizeConfig.scaleTextFont(12),
                   color: Colors.red.shade900,
                   fontWeight: FontWeight.w600,

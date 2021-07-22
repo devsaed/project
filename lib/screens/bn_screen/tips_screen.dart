@@ -1,6 +1,8 @@
+import 'package:budget_planner/utils/size_config.dart';
 import 'package:budget_planner/widgets/login_text_field_widget.dart';
 import 'package:budget_planner/widgets/tips_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TipsScreen extends StatefulWidget {
   @override
@@ -19,20 +21,19 @@ class _TipsScreenState extends State<TipsScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: SizeConfig.scaleWidth(20)),
       child: Column(
         children: [
           SizedBox(
-            height: 113,
+            height: SizeConfig.scaleHeight(113),
           ),
           LoginTextFieldWidget(
-            hint: 'Search',
+            hint: AppLocalizations.of(context)!.search,
             controller: controller,
-            errorMsg: null,
             prefixIcon: Icons.search_rounded,
           ),
           SizedBox(
-            height: 24,
+            height: SizeConfig.scaleHeight(24),
           ),
           Expanded(
             child: GridView.builder(
@@ -40,9 +41,9 @@ class _TipsScreenState extends State<TipsScreen> {
               itemCount: 10,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 17,
-                crossAxisSpacing: 10,
-                childAspectRatio: 182 / 230,
+                mainAxisSpacing: SizeConfig.scaleWidth(17),
+                crossAxisSpacing: SizeConfig.scaleHeight(10),
+                childAspectRatio: SizeConfig.scaleWidth(182) / SizeConfig.scaleHeight(230),
               ),
               itemBuilder: (context, index) {
                 return TipsWidget();

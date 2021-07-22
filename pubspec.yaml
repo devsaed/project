@@ -36,6 +36,7 @@ dependencies:
   shared_preferences: ^2.0.6
   intl: ^0.17.0
   get: ^4.1.4
+  percent_indicator: ^3.0.1
 
 
 dev_dependencies:

@@ -88,6 +88,11 @@
   "clear_account_data" : "مسح بيانات الحساب",
   "delete_account" : "إزالة/حذف الحساب",
   "deleted_message" : "هل انت متاكد انك تريد حذف البيانات الخاصة بالحساب",
-  "yes" : "YES",
-  "no" : "NO"
+  "yes" : "موافق",
+  "no" : "الغاء",
+
+  "my_name" : "سعيد النحال",
+  "ggateway" : "G-GateWay - Flutter",
+  "search" : "بحث"
+
 }

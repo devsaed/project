@@ -8,16 +8,14 @@ import 'package:budget_planner/utils/app_style_colors.dart';
 import 'package:budget_planner/utils/helpers.dart';
 import 'package:budget_planner/utils/size_config.dart';
 import 'package:budget_planner/widgets/app_elevated_button.dart';
-import 'package:budget_planner/widgets/app_text_widget.dart';
 import 'package:budget_planner/widgets/category_type_widget.dart';
 import 'package:budget_planner/widgets/general_text_field.dart';
 import 'package:budget_planner/widgets/header_widget.dart';
 import 'package:budget_planner/widgets/main_container_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
-import '../action_screen.dart';
+import 'action_screen.dart';
 import '../category/category_screen.dart';
 import '../currency_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -54,20 +52,13 @@ class _AddOperationState extends State<AddOperation> with Helpers {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ActionsScreen()));
-            },
-            icon: Icon(Icons.category),
-          )
-        ],
-      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(right: 20, left: 20, top: 80),
+          padding: EdgeInsets.only(
+            right: SizeConfig.scaleWidth(20),
+            left: SizeConfig.scaleWidth(20),
+            top: SizeConfig.scaleHeight(80),
+          ),
           child: Column(
             children: [
               HeaderWidget(
@@ -238,7 +229,8 @@ class _AddOperationState extends State<AddOperation> with Helpers {
     if (created) {
       showSnackBar(context,
           message: AppLocalizations.of(context)!.success_add_operation);
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (c)=> CreateOperationSuccess()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (c) => CreateOperationSuccess()));
     } else {
       showSnackBar(context,
           message: AppLocalizations.of(context)!.failed_add_operation,

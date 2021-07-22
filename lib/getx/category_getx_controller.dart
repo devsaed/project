@@ -57,4 +57,12 @@ class CategoryGetxController extends GetxController {
     category.clear();
   }
 
+  String getCategoryName(int id){
+    int index = category.indexWhere((element) => id == element.id);
+    return category[index].name;
+  }
+
+
+
+
 }

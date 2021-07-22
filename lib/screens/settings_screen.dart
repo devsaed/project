@@ -9,6 +9,7 @@ import 'package:budget_planner/utils/size_config.dart';
 import 'package:budget_planner/widgets/app_text_widget.dart';
 import 'package:budget_planner/widgets/settings_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatelessWidget with Helpers {
   @override
@@ -16,7 +17,7 @@ class SettingsScreen extends StatelessWidget with Helpers {
     return Scaffold(
       appBar: AppBar(
         title: AppTextWidget(
-          'Settings',
+          AppLocalizations.of(context)!.settings,
           color: AppStyleColors.PRIMARY_TEXT_COLOR,
           fontWeight: FontWeight.bold,
           fontSize: SizeConfig.scaleTextFont(20),
@@ -27,8 +28,18 @@ class SettingsScreen extends StatelessWidget with Helpers {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: EdgeInsets.only(top: SizeConfig.scaleHeight(25), bottom: SizeConfig.scaleHeight(15)),
+              child: AppTextWidget(
+                AppLocalizations.of(context)!.general,
+                color: AppStyleColors.PRIMARY_TEXT_COLOR,
+                fontSize: SizeConfig.scaleTextFont(15),
+                textAlign: TextAlign.center,
+              ),
+            ),
+
             SettingsWidget(
-              label: 'About App',
+              label: AppLocalizations.of(context)!.about_app,
               leading: Icon(Icons.info),
               trailingIcon: Icons.arrow_forward_ios,
               onTap: () {
@@ -36,30 +47,29 @@ class SettingsScreen extends StatelessWidget with Helpers {
               },
             ),
             SettingsWidget(
-              label: 'Language',
+              label: AppLocalizations.of(context)!.language,
               leading: Icon(Icons.language_outlined),
               trailingIcon: Icons.arrow_forward_ios,
               onTap: changeLang,
             ),
             SettingsWidget(
-              label: 'Logout',
+              label:  AppLocalizations.of(context)!.logout,
               leading: Icon(Icons.logout),
               onTap: () async {
                 await logout(context: context);
               },
             ),
             Padding(
-              padding: EdgeInsets.only(top: 25, bottom: 15),
+              padding: EdgeInsets.only(top: SizeConfig.scaleHeight(25), bottom: SizeConfig.scaleHeight(15)),
               child: AppTextWidget(
-                'Account & data',
+                AppLocalizations.of(context)!.account_and_data,
                 color: AppStyleColors.PRIMARY_TEXT_COLOR,
-                fontFamily: 'montserrat',
-                fontSize: 15,
+                fontSize: SizeConfig.scaleTextFont(15),
                 textAlign: TextAlign.center,
               ),
             ),
             SettingsWidget(
-              label: 'Clear account data',
+              label: AppLocalizations.of(context)!.clear_account_data,
               leading: Icon(
                 Icons.delete_forever,
                 color: Colors.red,
@@ -71,7 +81,7 @@ class SettingsScreen extends StatelessWidget with Helpers {
               },
             ),
             SettingsWidget(
-              label: 'Remove account',
+              label: AppLocalizations.of(context)!.delete_account,
               leading: Icon(
                 Icons.person_remove,
                 color: Colors.white,
@@ -107,8 +117,8 @@ class SettingsScreen extends StatelessWidget with Helpers {
   Future<void> deleteData(BuildContext context) async {
     bool status = await deleteDialog(
       context: context,
-      title: 'Clear account data',
-      content: 'Are you sure you want to delete your account data',
+      title: AppLocalizations.of(context)!.clear_account_data,
+      content: AppLocalizations.of(context)!.deleted_message,
     );
     if (status) {
       await ActionsGetxController.to.deleteAllRows();

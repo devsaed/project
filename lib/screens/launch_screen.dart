@@ -68,7 +68,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
             AppTextWidget(
               AppLocalizations.of(context)!.app_name,
               fontWeight: FontWeight.bold,
-              fontSize: 24,
+              fontSize: SizeConfig.scaleTextFont(24),
               color: AppStyleColors.PRIMARY_TEXT_COLOR,
             )
           ],

@@ -55,6 +55,8 @@
   "profile" : "Profile",
   "tips" : "Tips",
 
+
+
   "expense_details" : "Details",
   "expenses" : "Expenses",
   "incomes" : "Incomes",
@@ -90,5 +92,10 @@
   "delete_account" : "Remove account",
   "deleted_message" : "Are you sure you want to delete your account data",
   "yes" : "YES",
-  "no" : "NO"
+  "no" : "NO",
+
+  "my_name" : "SAID ALNAHHAL",
+  "ggateway" : "G-GateWay - Flutter",
+  "search" : "Search"
+
 }

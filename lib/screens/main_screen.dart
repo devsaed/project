@@ -1,6 +1,5 @@
 import 'package:budget_planner/getx/add_operation_getx_controller.dart';
 import 'package:budget_planner/getx/category_getx_controller.dart';
-import 'package:budget_planner/getx/currency_getx_controller.dart';
 import 'package:budget_planner/models/bn_screen.dart';
 import 'package:budget_planner/screens/bn_screen/category_screen.dart';
 import 'package:budget_planner/screens/bn_screen/home_screen.dart';

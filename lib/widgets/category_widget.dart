@@ -20,13 +20,17 @@ class CategoryWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: SizeConfig.scaleWidth(20)),
         child: Row(
           children: [
-            CircleAvatar(
-              backgroundColor: AppStyleColors.PRIMARY_COLOR,
-              radius: SizeConfig.scaleHeight(20),
-              child: AppTextWidget(
+            Container(
+              width: 50,
+              height: 50,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: AppStyleColors.PRIMARY_COLOR,
+                  borderRadius: BorderRadius.circular(10)),
+              child:  AppTextWidget(
                 category.name[0].toUpperCase(),
                 color: Colors.white,
-                fontSize: SizeConfig.scaleTextFont(15),
+                fontSize: SizeConfig.scaleTextFont(20),
                 fontWeight: FontWeight.w500,
               ),
             ),
